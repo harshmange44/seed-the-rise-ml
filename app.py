@@ -3,7 +3,7 @@ from flask import jsonify, make_response, request
 import pickle
 import pandas as pd
 
-def predict(temperature, humidity):
+def predict_health(temperature, humidity):
   classes = ['apple', 'banana', 'blackgram', 'chickpea', 'coconut', 'coffee', 'cotton', 'grapes', 'jute', 'kidneybeans', 'lentil', 'maize', 'mango', 'mothbeans', 'mungbean', 'muskmelon', 'orange', 'papaya', 'pigeonpeas', 'pomegranate', 'rice', 'watermelon']
   model = pickle.load(open('ML_model.pkl','rb'))
   model.predict([[temperature, humidity]])
@@ -28,7 +28,7 @@ def predict():
         humidity = request_data['humidity']
 
         # Get predictions
-        prediction = predict(temperature, humidity)
+        prediction = predict_health(temperature, humidity)
         response = make_response(prediction, 200)
         response.mimetype = "text/plain"
         return response
