@@ -1,5 +1,5 @@
 import flask
-from flask import jsonify, make_response
+from flask import jsonify, make_response, request
 import pickle
 import pandas as pd
 
@@ -23,8 +23,9 @@ def main():
 @app.route('/predict', methods=['POST'])
 def predict():
     if flask.request.method == 'POST':
-        temperature = flask.request.form.get('temperature')
-        humidity = flask.request.form.get('humidity')
+        request_data = request.get_json()
+        temperature = request_data['temperature']
+        humidity = request_data['humidity']
 
         # Get predictions
         prediction = predict(temperature, humidity)
