@@ -22,10 +22,9 @@ def main():
 # Set up route for prediction
 @app.route('/predict', methods=['POST'])
 def predict():
-    
     if flask.request.method == 'POST':
-        temperature = flask.request.form['temperature']
-        humidity = flask.request.form['humidity']
+        temperature = flask.request.json['temperature']
+        humidity = flask.request.json['humidity']
 
         # Get predictions
         prediction = predict(temperature, humidity)
