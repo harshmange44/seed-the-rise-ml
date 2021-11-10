@@ -29,8 +29,10 @@ def predict():
 
         # Get predictions
         prediction = predict(temperature, humidity)
-    
-        return jsonify(health=prediction)
+        response = make_response(prediction, 200)
+        response.mimetype = "text/plain"
+        return response
+        # return jsonify(health=prediction)
 
 if __name__ == '__main__':
     app.run()
