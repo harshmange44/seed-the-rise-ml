@@ -1,5 +1,5 @@
 import flask
-from flask import jsonify
+from flask import jsonify, make_response
 import pickle
 import pandas as pd
 
@@ -15,11 +15,13 @@ app = flask.Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def main():
-    return ("Seed The Rise ML Server Running...")
+    response = make_response("Seed The Rise ML Server Running...", 200)
+    response.mimetype = "text/plain"
+    return response
 
 # Set up route for prediction
 @app.route('/predict', methods=['POST'])
-def main():
+def predict():
     
     if flask.request.method == 'POST':
         temperature = flask.request.form['temperature']
